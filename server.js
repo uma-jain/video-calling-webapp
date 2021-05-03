@@ -6,7 +6,7 @@ const { v4: uuidv4 } = require("uuid");
 const io = require("socket.io")(server,{
   //https://evening-shelf-31784.herokuapp.com/
   cors: {
-    origin: "http://localhost:3000",
+    origin: "https://evening-shelf-31784.herokuapp.com",
     methods: ["GET", "POST"]
   }
 });
