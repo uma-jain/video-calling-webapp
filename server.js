@@ -3,20 +3,22 @@ const app = express();
 const server = require("http").Server(app);
 const { v4: uuidv4 } = require("uuid");
 
-const io = require("socket.io")(server,{
+/*const io = require("socket.io")(server,{
   //https://evening-shelf-31784.herokuapp.com/
   cors: {
     origin: "https://evening-shelf-31784.herokuapp.com",
     methods: ["GET", "POST"]
   }
-});
+});*/
+
+const io = require("socket.io")(server)
+
 const path = require('path');
 
 const cors=require('cors');
 // Peer
 
 const { ExpressPeerServer } = require("peer");
-const { resolve } = require("path");
 const peerServer = ExpressPeerServer(server, {
   debug: true,
 });
@@ -57,7 +59,7 @@ io.on("connect", (socket) => {
 
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
-  console.log("in production ");
+  console.log("in production "+process.env.PORT);
 
   app.use(express.static('client/build'));
 // Handle React routing, return all requests to React app

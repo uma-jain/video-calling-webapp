@@ -4,7 +4,7 @@ import Peer from 'peerjs';
 
 import "./Meeting.css";
 
-const ENDPOINT = "https://evening-shelf-31784.herokuapp.com";
+const ENDPOINT = "/";
 //https://evening-shelf-31784.herokuapp.com/
 
 const UserName=localStorage.getItem('username');
@@ -19,6 +19,7 @@ function Meeting(props) {
     useEffect(() => {
     const RoomId=props.match.params.roomId;
     const socket = io(ENDPOINT);    
+
     let myVideoStream;
     const videoGrid = document.getElementById("video-grid");
     const myVideo = document.createElement("video");
@@ -28,8 +29,6 @@ const chatInputBox = document.getElementById("chat_message");
 const all_messages = document.getElementById("all_messages");
 const main__chat__window = document.getElementById("main__chat__window");
 
-
-
     
 var peer = new Peer(undefined, {
   path: "/peerjs",
@@ -37,6 +36,7 @@ var peer = new Peer(undefined, {
   port: process.env.PORT,
 })
 
+alert(process.env.port)
 // display my video on screenn
 navigator.mediaDevices
   .getUserMedia({
@@ -45,11 +45,12 @@ navigator.mediaDevices
   })
   .then((stream) => {
     //own video on screen
+    console.log(stream);
     myVideoStream = stream;
     addVideoStream(myVideo, myVideoStream);   
 
     socket.on("user-connected", (user) => {
-   //   alert("user connected")
+    console.log("user connected")
       connectToNewUser(user, stream);
       var x = document.getElementById("snackbar");
       x.className = "show";
@@ -64,7 +65,7 @@ navigator.mediaDevices
 
 
 peer.on("open", (id) => {
-//  alert("peer connected")
+  alert("peer connected")
   socket.emit("join-room",RoomId, id,UserName);
   
 });
@@ -91,7 +92,7 @@ socket.on('user-disconnected', user => {
 
 peer.on("call", function (call) {
   //this runs for all connected peers
-
+  console.log(call);
   getUserMedia(
     { video: true, audio: true },
     function (stream) {
@@ -100,7 +101,6 @@ peer.on("call", function (call) {
 
      peers[call.peer] = call;
       const video = document.createElement("video");
-   // video.id = call.peer;
 
       call.on("stream", function (remoteStream) {     
         addVideoStream(video, remoteStream);
