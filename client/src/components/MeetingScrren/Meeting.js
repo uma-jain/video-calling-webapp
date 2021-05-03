@@ -4,7 +4,7 @@ import Peer from 'peerjs';
 
 import "./Meeting.css";
 
-const ENDPOINT = "http://localhost:5000";
+const ENDPOINT = "https://evening-shelf-31784.herokuapp.com";
 
 const UserName=localStorage.getItem('username');
 var getUserMedia =
