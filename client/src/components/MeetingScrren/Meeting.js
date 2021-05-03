@@ -4,7 +4,7 @@ import Peer from 'peerjs';
 
 import "./Meeting.css";
 
-const ENDPOINT = "/";
+const ENDPOINT = "https://evening-shelf-31784.herokuapp.com";
 //https://evening-shelf-31784.herokuapp.com/
 
 const UserName=localStorage.getItem('username');
@@ -33,7 +33,7 @@ const main__chat__window = document.getElementById("main__chat__window");
 var peer = new Peer(undefined, {
   path: "/peerjs",
   host: "/",
-  port: process.env.PORT,
+  port: process.env.PORT||5000,
 })
 
 alert(process.env.port)
@@ -92,7 +92,7 @@ socket.on('user-disconnected', user => {
 
 peer.on("call", function (call) {
   //this runs for all connected peers
-  console.log(call);
+
   getUserMedia(
     { video: true, audio: true },
     function (stream) {
