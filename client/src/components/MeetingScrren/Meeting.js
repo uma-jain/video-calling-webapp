@@ -4,7 +4,8 @@ import Peer from 'peerjs';
 
 import "./Meeting.css";
 
-const ENDPOINT = "https://evening-shelf-31784.herokuapp.com";
+const ENDPOINT = "http://localhost:5000";
+//https://evening-shelf-31784.herokuapp.com/
 
 const UserName=localStorage.getItem('username');
 var getUserMedia =
@@ -33,7 +34,7 @@ const main__chat__window = document.getElementById("main__chat__window");
 var peer = new Peer(undefined, {
   path: "/peerjs",
   host: "/",
-  port: "5000",
+  port: location.port,
 })
 
 // display my video on screenn
