@@ -32,8 +32,8 @@ const main__chat__window = document.getElementById("main__chat__window");
     
 var peer = new Peer(undefined, {
   path: "/peerjs",
-  host: "/",
-  port: process.env.PORT||5000,
+  host: "evening-shelf-31784.herokuapp.com",
+  port: 443,
 })
 
 alert(process.env.port)
