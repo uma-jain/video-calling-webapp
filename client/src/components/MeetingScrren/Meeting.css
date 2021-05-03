@@ -1,0 +1,179 @@
+
+#video-grid {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+video {
+  margin: 5px;
+  outline: 1px solid #000;
+  width: 400px;
+}
+.main {
+  min-height: 100vh;
+  display: flex;
+  
+}
+.main__left {
+  flex: 0.8;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(233, 233, 233);
+  min-height: 100%; 
+
+}
+.main__right {
+  flex: 0.2;
+  display: flex;
+  flex-direction: column;  
+  background-color: #242324;
+  border-left: 1px solid #3d3d42;
+ min-height: 100%;
+}
+.main__videos {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.main__header {
+  color: #f5f5f5;
+  text-align: center;
+  padding: 20px;
+  border-bottom: 2px solid #3d3d42;
+}
+.main__chat__window {
+  flex-grow: 1;
+  overflow: auto;
+  padding: 20px 20px 0 20px;
+  max-height: 86vh;
+}
+.main__chat__window::-webkit-scrollbar {
+  width: 10px;
+  background-color: rgba(0,0,0,0);
+}
+
+.main__chat__window::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
+}
+
+
+h2{
+  color: black;
+  font-size: 15px;
+  margin: 10px auto 0px auto;  
+  font-weight: 200;
+}
+.main__message_container {
+  display: flex;  
+  border-top: 1px solid black;
+  padding:0px 0;
+
+  justify-content: center;
+  align-items: center;
+  
+}
+.main__message_container input {
+  
+  flex-grow: 1;
+  background-color: transparent;
+  border: none;
+  color: white;
+  user-select: none;
+  outline: none;
+  margin:0;
+}
+
+
+
+input::-webkit-input-placeholder {
+  color: rgb(214, 208, 208);
+}
+
+input:focus::-webkit-input-placeholder {
+
+  color: rgb(218, 214, 214);
+}
+
+#all_messages li {
+  color: #fff;
+  list-style: none;
+  border-bottom: 1px solid #3d3d42;
+  padding: 10px 0;
+}
+
+#snackbar {
+  visibility: hidden; /* Hidden by default. Visible on click */
+  min-width: 250px; /* Set a default minimum width */
+  margin-left: -125px; /* Divide value of min-width by 2 */
+  background-color: rgb(66, 68, 67); /* Black background color */
+  color: #fff; /* White text color */
+  text-align: center; /* Centered text */
+  border-radius: 2px; /* Rounded borders */
+  padding: 10px; /* Padding */
+  position: fixed; /* Sit on top of the screen */
+  z-index: 1; /* Add a z-index if needed */
+  left: 50%; /* Center the snackbar */
+  bottom: 30px; /* 30px from the bottom */
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar.show {
+  visibility: visible; /* Show the snackbar */
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 2.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+.send-btn{
+  border: none;
+  display: inline-block;
+ 
+  color: white;
+  width: 60px;
+  outline: none;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+}
+.send-btn:hover{  
+    transform: scale(1.02);
+    box-shadow: black;
+    color:  rgb(201, 37, 100);
+    font-weight: 400;
+}
+
+.meeting-details{
+  position: relative;
+}
+.user-list-icon{
+  position: absolute;
+  z-index: 455;
+}
