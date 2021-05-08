@@ -4,14 +4,20 @@ const server = require("http").Server(app);
 const { v4: uuidv4 } = require("uuid");
 
 const io = require("socket.io")(server,{
-  //https://evening-shelf-31784.herokuapp.com/
   cors: {
     origin: "https://evening-shelf-31784.herokuapp.com",
     methods: ["GET", "POST"]
   }
 });
 
-//const io = require("socket.io")(server)
+/*
+const io = require("socket.io")(server,{
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"]
+  }
+});*/
+
 
 const path = require('path');
 

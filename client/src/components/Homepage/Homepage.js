@@ -65,8 +65,7 @@ function Homepage(props) {
     return (
         <div className="main-c">
             <div className="content">
-                <h1>UNITE</h1>
-                                      
+                <h1>UNITE</h1>                                     
                           
                 <div class="join-form">
                     <input type="string" 

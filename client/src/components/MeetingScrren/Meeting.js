@@ -1,13 +1,12 @@
-import React,{useEffect} from 'react'
+import React,{useEffect, useState} from 'react'
 import { io } from "socket.io-client";
 import Peer from 'peerjs';
 
 import "./Meeting.css";
 
 const ENDPOINT = "https://evening-shelf-31784.herokuapp.com";
-//https://evening-shelf-31784.herokuapp.com/
+//const ENDPOINT = "http://localhost:5000";
 
-const UserName=localStorage.getItem('username');
 var getUserMedia =
   navigator.getUserMedia ||
   navigator.webkitGetUserMedia ||
@@ -15,8 +14,16 @@ var getUserMedia =
   const peers = {};
 
 function Meeting(props) {
+ const [UserName,setUsername]=useState(localStorage.getItem("username"))
 
     useEffect(() => {
+
+      if( localStorage.getItem("username")==null ||  localStorage.getItem("username")==undefined || localStorage.getItem("username")==" "){
+           var name= prompt("Enter your name: ");
+          setUsername(name);
+           localStorage.setItem("username",name)
+         }
+
     const RoomId=props.match.params.roomId;
     const socket = io(ENDPOINT);    
 
@@ -36,7 +43,16 @@ var peer = new Peer(undefined, {
   port: 443,
 })
 
-alert(process.env.port)
+
+
+/*var peer = new Peer(undefined, {
+  path: "/peerjs",
+  host: "/",
+  port: 5000,
+})*/
+
+
+//alert(process.env.port)
 // display my video on screenn
 navigator.mediaDevices
   .getUserMedia({
@@ -61,14 +77,15 @@ navigator.mediaDevices
       
     });   
   })
-  .catch(err => alert(err));
+  .catch(err =>alert(err));
 
 
 peer.on("open", (id) => {
-  alert("peer connected")
+ console.log("peer connected")
   socket.emit("join-room",RoomId, id,UserName);
   
 });
+
 socket.on('user-disconnected', user => { 
 
   console.log(`peer with id ${user.peerId} disconnected`);
@@ -126,6 +143,14 @@ peer.on("call", function (call) {
   }
  })
 
+ document.getElementById("leave-met").addEventListener("click",(e)=>{
+   alert("end meet")
+  socket.close();
+  props.history.push("/")
+
+ })
+
+
 document.addEventListener("keydown", (e) => {
   if (e.which === 13 && chatInputBox.value != "") {
     socket.emit("message", chatInputBox.value);
@@ -177,6 +202,8 @@ const addVideoStream = (videoEl, stream) => {
       <div class="main__left">
       {UserName && <h2>UserName :- {UserName} </h2>}
       <h2 className="meeting-details">Meeting Id :- {props.match.params.roomId} </h2>
+      <button  id="leave-met" >Leave Meeting</button>
+       
       <i class="fa fa-user-friends"></i>
         <div class="main__videos">
           <div id="video-grid"></div>
